@@ -9,10 +9,14 @@
                    to="${escapeXmlAttribute(srcOut)}/module/${activityPackage}/${activityClass}Presenter.java" />
     <instantiate from="root/src/app_package/MVPView.java.ftl"
                    to="${escapeXmlAttribute(srcOut)}/module/${activityPackage}/${activityClass}View.java" />
+    <#if useApi>
+    <instantiate from="root/src/model/ModelResponse.java.ftl"
+                  to="${escapeXmlAttribute(srcOut)}/model/${activityPackage}/${activityClass}Response.java" />
+    <#if method == 'post' || method == 'put'>
     <instantiate from="root/src/model/ModelRequest.java.ftl"
                    to="${escapeXmlAttribute(srcOut)}/model/${activityPackage}/${activityClass}Request.java" />
-    <instantiate from="root/src/model/ModelResponse.java.ftl"
-                   to="${escapeXmlAttribute(srcOut)}/model/${activityPackage}/${activityClass}Response.java" />
+    </#if>
+    </#if>
 
 
 

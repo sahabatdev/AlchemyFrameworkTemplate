@@ -12,11 +12,14 @@
     <instantiate from="root/src/app_package/MVPAdapter.java.ftl"
                    to="${escapeXmlAttribute(srcOut)}/module/${activityPackage}/${activityClass}Adapter.java" />
 
+    <#if useApi>
+    <instantiate from="root/src/model/ModelResponse.java.ftl"
+                  to="${escapeXmlAttribute(srcOut)}/model/${activityPackage}/${activityClass}Response.java" />
+    <#if method == 'post' || method == 'put'>
     <instantiate from="root/src/model/ModelRequest.java.ftl"
                    to="${escapeXmlAttribute(srcOut)}/model/${activityPackage}/${activityClass}Request.java" />
-    <instantiate from="root/src/model/ModelResponse.java.ftl"
-                   to="${escapeXmlAttribute(srcOut)}/model/${activityPackage}/${activityClass}Response.java" />
-
+    </#if>
+    </#if>
 
 
     <instantiate from="root/res/layout/activity_mvp.xml.ftl"
