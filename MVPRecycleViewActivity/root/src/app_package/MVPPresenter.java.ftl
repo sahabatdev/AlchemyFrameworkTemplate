@@ -1,6 +1,10 @@
 package ${packageName}.module.${activityPackage};
 
 import java.io.IOException;
+import java.lang.reflect.Type;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+import java.util.List;
 
 <#if useApi>
 import ${packageName}.network.ApiClient;
@@ -31,7 +35,10 @@ public class ${activityClass}Presenter {
                 mView.onHideProgressDialog();
                 if (response.isSuccessful()) {
                     try {
-                        ${activityClass}Response respon = new SahabatHelper<${activityClass}Response>().convertJsonToModel(response.body().string());
+                        Gson gson = new Gson();
+                        Type type = (new TypeToken<List<${activityClass}Response>>() {
+                        }).getType();
+                        List<${activityClass}Response> respon = gson.fromJson(response.body().string(), type);
                         mView.onSuccess${activityClass}(respon);
                     } catch (IOException e) {
                         e.printStackTrace();
