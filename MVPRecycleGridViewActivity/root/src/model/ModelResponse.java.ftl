@@ -9,6 +9,9 @@ public class ${activityClass}Response {
     @Expose
     @SerializedName("description")
     private String description;
+    @Expose
+    @SerializedName("urlImage")
+    private String urlImage;
     <#if isClick>
     @Expose
     @SerializedName("detail")
@@ -22,6 +25,11 @@ public class ${activityClass}Response {
     public String getDescription() {
         return description;
     }
+
+    public String getUrlImage() {
+        return urlImage;
+    }
+
     <#if isClick>
     public String getDetail() {
         return detail;

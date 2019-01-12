@@ -23,9 +23,9 @@ public class ${activityClass}Presenter {
     }
 
     <#if useApi>
-    public void do${activityClass}(<#if method == 'delete'>int id</#if><#if method == 'post'><#if method == 'put'>int id,</#if>${activityClass}Request request</#if>) {
+    public void do${activityClass}(<#if method == 'get'><#if auth != 'no'>String auth</#if></#if><#if method == 'delete'><#if auth != 'no'>String auth,</#if>int id</#if><#if method == 'post' || method == 'put'><#if auth != 'no'>String auth,</#if><#if method == 'put'>int id,</#if>${activityClass}Request request</#if>) {
         mView.onShowProgressDialog();
-        ApiClient.getClient().<#if method == 'get'>GET("${pathApi}")</#if><#if method == 'post'>POST(request, "${pathApi}")</#if><#if method == 'put'>PUT(request, "${pathApi}", id)</#if><#if method == 'delete'>DELETE("${pathApi}",id)</#if>.enqueue(new Callback<ResponseBody>() {
+        ApiClient.getClient().<#if method == 'get'>GET(<#if auth != 'no'>auth,</#if>"${pathApi}")</#if><#if method == 'post'>POST(<#if auth != 'no'>auth,</#if>request, "${pathApi}")</#if><#if method == 'put'>PUT(<#if auth != 'no'>auth,</#if>request, "${pathApi}", id)</#if><#if method == 'delete'><#if auth != 'no'>auth,</#if>DELETE("${pathApi}",id)</#if>.enqueue(new Callback<ResponseBody>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 mView.onHideProgressDialog();

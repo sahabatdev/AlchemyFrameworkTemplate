@@ -2,12 +2,12 @@
 <template
     format="5"
     revision="5"
-    name="MVP Empty Activity"
+    name="Alchemy MVP Blank Activity"
     minApi="9"
     minBuildApi="14"
     description="Creates a new MVP Empty Activity">
 
-    <category value="SahabatDevFramework" />
+    <category value="AlchemyFramework" />
     <formfactor value="Mobile" />
 
     <parameter
@@ -36,6 +36,23 @@
         help="The name of the layout to create for the activity" />
 
     <parameter
+            id="isToolbarBack"
+            name="is Toolbar Back"
+            type="boolean"
+            default="true"
+            help="If true, a toolbar back code will be generated" />
+
+    <parameter
+            id="tipeLayout"
+            name="Activity Type"
+            type="enum"
+            default="empty"
+            help="The Authorization of the API Backend to create" >
+        <option id="empty">Empty</option>
+        <option id="detail">Detail From Recycle View</option>
+    </parameter>
+
+    <parameter
             id="useApi"
             name="Use data API"
             type="boolean"
@@ -44,11 +61,41 @@
 
     <parameter
             id="pathApi"
-            name="Package Name"
+            name="Path API"
             type="string"
             constraints="nonempty"
             visibility="useApi"
-            default="/v1/login"
+            default="v1/login"
+            help="The path of the API backend to create" />
+
+    <parameter
+            id="auth"
+            name="AUTHORIZATION"
+            type="enum"
+            default="no"
+            visibility="useApi"
+            help="The Authorization of the API Backend to create" >
+        <option id="no">No Auth</option>
+        <option id="basic">Basic Auth</option>
+        <option id="bearer">Bearer Auth</option>
+    </parameter>
+
+    <parameter
+            id="basicUserPassword"
+            name="Username:Password"
+            type="string"
+            constraints="nonempty"
+            visibility="auth=='basic'"
+            default="admin:admin"
+            help="The path of the API backend to create" />
+
+    <parameter
+            id="bearerToken"
+            name="Token"
+            type="string"
+            constraints="nonempty"
+            visibility="auth=='bearer'"
+            default="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjViOTc2MmM"
             help="The path of the API backend to create" />
 
     <parameter

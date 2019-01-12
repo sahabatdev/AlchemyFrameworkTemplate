@@ -6,7 +6,9 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
+import com.bumptech.glide.Glide;
 
 <#if isClick>
 import android.widget.LinearLayout;
@@ -42,6 +44,7 @@ public class ${activityClass}Adapter extends RecyclerView.Adapter<${activityClas
         <#if isClick>final </#if>${activityClass}Response response = list${activityClass}.get(position);
         holder.tvTitle.setText(response.getTitle());
         holder.tvDeskripsi.setText(response.getDescription());
+        Glide.with(context).load(response.getUrlImage()).into(holder.imgItem${activityClass});
 
         <#if isClick>
         holder.linearItem${activityClass}.setOnClickListener(new View.OnClickListener() {
@@ -60,6 +63,7 @@ public class ${activityClass}Adapter extends RecyclerView.Adapter<${activityClas
 
     public class ViewHolder extends RecyclerView.ViewHolder {
         TextView tvTitle, tvDeskripsi;
+        ImageView imgItem${activityClass};
         <#if isClick>
         LinearLayout linearItem${activityClass};
         </#if>
@@ -67,6 +71,7 @@ public class ${activityClass}Adapter extends RecyclerView.Adapter<${activityClas
             super(itemView);
             tvTitle = itemView.findViewById(R.id.tv_title);
             tvDeskripsi = itemView.findViewById(R.id.tv_deskripsi);
+            imgItem${activityClass} = itemView.findViewById(R.id.img_item_${activityPackage});
             <#if isClick>
             linearItem${activityClass} = itemView.findViewById(R.id.linear_item_${activityPackage});
             </#if>

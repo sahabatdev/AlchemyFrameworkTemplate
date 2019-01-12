@@ -2,10 +2,10 @@
 <template
     format="5"
     revision="5"
-    name="Alchemy MVP Recycle List View Activity"
+    name="Alchemy MVP Recycle Grid View Activity"
     minApi="9"
     minBuildApi="14"
-    description="Creates a new MVP Recycle List View Activity">
+    description="Creates a new MVP Recycle Grid View Activity">
 
     <category value="AlchemyFramework" />
     <formfactor value="Mobile" />

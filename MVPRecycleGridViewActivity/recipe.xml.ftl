@@ -3,12 +3,18 @@
 <recipe>
     <#include "recipe_manifest.xml.ftl" />
 
+    <dependency mavenUrl="com.github.bumptech.glide:glide:4.8.0"/>
+    <dependency mavenUrl="com.github.bumptech.glide:compiler:4.8.0" gradleConfiguration="annotationProcessor"/>
+
     <instantiate from="root/src/app_package/MVPActivity.java.ftl"
                    to="${escapeXmlAttribute(srcOut)}/module/${activityPackage}/${activityClass}Activity.java" />
     <instantiate from="root/src/app_package/MVPPresenter.java.ftl"
                    to="${escapeXmlAttribute(srcOut)}/module/${activityPackage}/${activityClass}Presenter.java" />
     <instantiate from="root/src/app_package/MVPView.java.ftl"
                    to="${escapeXmlAttribute(srcOut)}/module/${activityPackage}/${activityClass}View.java" />
+    <instantiate from="root/src/app_package/MVPAdapter.java.ftl"
+                   to="${escapeXmlAttribute(srcOut)}/module/${activityPackage}/${activityClass}Adapter.java" />
+
     <#if useApi>
     <instantiate from="root/src/model/ModelResponse.java.ftl"
                   to="${escapeXmlAttribute(srcOut)}/model/${activityPackage}/${activityClass}Response.java" />
@@ -18,16 +24,11 @@
     </#if>
     </#if>
 
-    <#if tipeLayout == 'empty'>
+
     <instantiate from="root/res/layout/activity_mvp.xml.ftl"
                    to="${escapeXmlAttribute(resOut)}/layout/${layoutName}.xml" />
-
-    </#if>
-    <#if tipeLayout == 'detail'>
-    <instantiate from="root/res/layout/activity_detail_mvp.xml.ftl"
-                   to="${escapeXmlAttribute(resOut)}/layout/${layoutName}.xml" />
-
-    </#if>
+    <instantiate from="root/res/layout/item_list_mvp.xml.ftl"
+                   to="${escapeXmlAttribute(resOut)}/layout/item_list_${activityPackage}.xml" />
 
     <open file="${escapeXmlAttribute(srcOut)}/module/${activityPackage}/${activityClass}Activity.java" />
     <open file="${escapeXmlAttribute(resOut)}/layout/${layoutName}.xml" />

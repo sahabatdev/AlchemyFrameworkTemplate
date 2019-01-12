@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="WebServers">
+    <option name="servers">
+      <webServer id="82b36e06-376c-438f-b25f-136343aaa7f0" name="Alchemy" url="http://sahabatdeveloper.site">
+        <fileTransfer host="sahabatdeveloper.site" port="21" rootFolder="/var/www/html/alchemy">
+          <advancedOptions>
+            <advancedOptions dataProtectionLevel="Private" />
+          </advancedOptions>
+          <option name="port" value="21" />
+        </fileTransfer>
+      </webServer>
+    </option>
+  </component>
+</project>
