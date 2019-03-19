@@ -10,6 +10,14 @@
           <option name="port" value="21" />
         </fileTransfer>
       </webServer>
+      <webServer id="f490d8df-fb35-4da9-92b7-e1ca7a024ea6" name="Kasir Saku" url="http://sahabatdeveloper.site">
+        <fileTransfer host="sahabatdeveloper.site" port="21" rootFolder="/var/www/html/kasirsaku">
+          <advancedOptions>
+            <advancedOptions dataProtectionLevel="Private" />
+          </advancedOptions>
+          <option name="port" value="21" />
+        </fileTransfer>
+      </webServer>
     </option>
   </component>
 </project>
