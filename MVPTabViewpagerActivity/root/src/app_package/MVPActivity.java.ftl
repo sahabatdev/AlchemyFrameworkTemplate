@@ -3,11 +3,10 @@ package ${packageName}.module.${activityPackage};
 import ${packageName}.R;
 import android.os.Bundle;
 import site.sahabatdeveloper.sahabatlibrary.base.BaseActivity;
+import android.support.design.widget.TabLayout;
+import android.support.v4.view.ViewPager;
 <#if isToolbarBack>
 import android.view.MenuItem;
-</#if>
-<#if tipeLayout == 'detail'>
-import android.widget.TextView;
 </#if>
 <#if useApi>
 <#if auth != 'no'>
@@ -24,41 +23,35 @@ import ${packageName}.model.${activityPackage}.${activityClass}Request;
 public class ${activityClass}Activity extends BaseActivity implements ${activityClass}View{
 
     ${activityClass}Presenter mPresenter;
-    <#if tipeLayout == 'detail'>
-    TextView tvTitle, tvDetail;
-    </#if>
-
+    TabLayout tab${activityClass};
+    ViewPager viewPager${activityClass};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.${layoutName});
 
+        getSupportActionBar().setTitle("${activityClass}");
         <#if isToolbarBack>
-        <#if tipeLayout == 'empty'>
-        getSupportActionBar().setTitle("${activityClass}");
-        </#if>
-        <#if tipeLayout == 'detail'>
-        getSupportActionBar().setTitle("${activityClass}");
-        </#if>
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         </#if>
 
         mPresenter = new ${activityClass}Presenter(this);
-        <#if tipeLayout == 'detail'>
-        tvTitle = findViewById(R.id.tv_title);
-        tvDetail = findViewById(R.id.tv_detail);
+        tabTab = findViewById(R.id.tab_${activityPackage});
+        viewPagerTab = findViewById(R.id.view_pager_${activityPackage});
 
-        if(getIntent().getExtras()!=null){
-            tvTitle.setText(getIntent().getExtras().getString("title"));
-            tvDetail.setText(getIntent().getExtras().getString("detail"));
-        }
-        </#if>
+        //Set Pageradapter dengan ViewPager
+        setupWithPager(viewPager${activityClass});
+        tab${activityClass}.setupWithViewPager(viewPager${activityClass});
 
-        <#if useApi>
-        mPresenter.do${activityClass}(<#if method == 'get'><#if auth == 'basic'>"Basic " + Base64.encodeToString(("${basicUserPassword}").getBytes(),Base64.DEFAULT)</#if><#if auth == 'bearer'>"Bearer "+ Base64.encodeToString(("${bearerToken}").getBytes(),Base64.DEFAULT)</#if></#if><#if method == 'delete'><#if auth == 'basic'>"Basic " + Base64.encodeToString(("${basicUserPassword}").getBytes(),Base64.DEFAULT),</#if><#if auth == 'bearer'>"Bearer "+ Base64.encodeToString(("${bearerToken}").getBytes(),Base64.DEFAULT),</#if>1</#if><#if method == 'post' || method == 'put'><#if auth == 'basic'>"Basic " + Base64.encodeToString(("${basicUserPassword}").getBytes(),Base64.DEFAULT),</#if><#if auth == 'bearer'>"Bearer "+ Base64.encodeToString(("${bearerToken}").getBytes(),Base64.DEFAULT),</#if><#if method == 'put'>1,</#if>new ${activityClass}Request()</#if>);  //TODO Call Presenter to Request API
-        </#if>
+    }
 
+    //Fungsi untuk memasangkan PagerAdapter dengan ViewPager
+    private void setupWithPager(ViewPager viewPagerTab) {
+        ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
+        adapter.addFragment(new ${fragment1Class}Fragment(), "${fragment1Class}");
+        adapter.addFragment(new ${fragment2Class}Fragment(), "${fragment2Class}");
+        viewPagerTab.setAdapter(adapter);
     }
 
     <#if useApi>
@@ -70,17 +63,17 @@ public class ${activityClass}Activity extends BaseActivity implements ${activity
 
     @Override
     public void onMessage(String s) {
-        toastMessage(s);
+        getUserInterface().showMessageToast(s);
     }
 
     @Override
     public void onShowProgressDialog() {
-        showProgressDialog();
+        getLoading().showLoadingDialog();
     }
 
     @Override
     public void onHideProgressDialog() {
-        hideProgressDialog();
+        getLoading().hideLoadingDialog();
     }
 
     <#if isToolbarBack>

@@ -70,17 +70,17 @@ public class ${activityClass}Activity extends BaseActivity implements ${activity
 
     @Override
     public void onMessage(String s) {
-        toastMessage(s);
+        getUserInterface().showMessageToast(s);
     }
 
     @Override
     public void onShowProgressDialog() {
-        showProgressDialog();
+        getLoading().showLoadingDialog();
     }
 
     @Override
     public void onHideProgressDialog() {
-        hideProgressDialog();
+        getLoading().hideLoadingDialog();
     }
 
     <#if isToolbarBack>
